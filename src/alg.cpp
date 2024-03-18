@@ -45,7 +45,6 @@ int countPairs3(int *arr, int len, int value) {
         int iTemp = value - arr[i];
         int l = i + 1;
         int r = len - 1;
-        if (l < iTemp) {
             while (l < r) {
                 int mid = (l + r) / 2;
                 if (r - l == 1) {
@@ -73,7 +72,6 @@ int countPairs3(int *arr, int len, int value) {
                     break;
                 }
             }
-        }
         sum += count;
     }
     return sum;
