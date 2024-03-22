@@ -30,42 +30,31 @@ int countPairs2(int *arr, int len, int value) {
 }
 
 int cbinsearch(int *arr, int size, int value) {
-    int iTemp = size / 2;
-    int counter = 0;
-    bool bFlag = true;
-    if (arr[iTemp] == value) {
-        while (arr[iTemp] == value && iTemp >= 0) {
-            iTemp--;
-        }
-        iTemp++;
-        while (arr[iTemp] == value && iTemp < size) {
-            iTemp++;
-            counter++;
-        }
-        return counter;
-    }
-    while (iTemp >= 0 && iTemp < size && bFlag) {
-        if (arr[iTemp] == value) {
-            while (iTemp >= 0 && iTemp < size && arr[iTemp] == value) {
-                counter++;
-                if (arr[iTemp] < arr[size / 2]) {
-                    iTemp--;
-                } else {
-                    iTemp++;
-                }
-            }
-            bFlag = false;
-        } else if (arr[iTemp] > value && arr[iTemp - 1] < value) {
+    int iLeft = *arr;
+    int iRight = size - 1;
+    int iCounter = 0;
+    while (iLeft < iRight) {
+        int iMid = (iLeft + iRight) / 2;
+        if (iRight - iLeft == 1) {
             return 0;
-        } else if (arr[iTemp + 1] > value && arr[iTemp] < value) {
-            return 0;
-        } else if (arr[iTemp] > value) {
-            iTemp--;
+        }
+        if (value > arr[iMid]) {
+            iLeft = iMid;
+        } else if (value < arr[iMid]) {
+            iRight = iMid;
         } else {
-            iTemp++;
+            while (arr[iMid] == value) {
+               iMid--;
+            }
+            iMid++;
+            while (arr[iMid] == value) {
+                iMid++;
+                iCounter++;
+            }
+            break;
         }
     }
-    return counter;
+    return iCounter;
 }
 
 int countPairs3(int *arr, int len, int value) {
