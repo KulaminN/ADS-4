@@ -14,14 +14,13 @@ int countPairs1(int *arr, int len, int value) {
 
 int countPairs2(int *arr, int len, int value) {
     int j = len - 1;
-    int i = 0;
     int count = 0;
     while (arr[j] > value) {
         j--;
     }
-    for (int m = i; m < j; m++) {
-        for (int n = j; n > m; n--) {
-            if (arr[m] + arr[n] == value) {
+    for (int i = 0; i < j; i++) {
+        for (int n = j; n > i; n--) {
+            if (arr[i] + arr[n] == value) {
                 count++;
             }
         }
@@ -34,7 +33,7 @@ int cbinsearch(int *arr, int size, int value) {
     int iRight = size - 1;
     int iCounter = 0;
     while (iLeft <= iRight) {
-        int iMid = iLeft + (iLeft - iRight) / 2;
+        int iMid = iLeft + (iRight - iLeft) / 2;
         if (value > arr[iMid]) {
             iLeft = iMid + 1;
         } else if (value < arr[iMid]) {
